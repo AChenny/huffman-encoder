@@ -19,9 +19,52 @@ Map<T, V>::~Map()
 }
 
 template<class T, class V>
+int Map<T, V>::getNumEntries()
+{
+	return numEntries;
+}
+
+template<class T, class V>
+V Map<T, V>::getValue(T k)
+{
+	for (int i = 0; i < numEntries; i++) {
+		if (k == key[i]) {
+			//Key found print out value
+			return value[i];
+		}
+	}
+	//Not found print out not found
+	return NULL;
+
+}
+
+template<class T, class V>
+void Map<T, V>::setValue(T k, V v)
+{
+	for (int i = 0; i < numEntries; i++) {
+		if (k == key[i]) {
+			value[i] = v;
+		}
+	}
+}
+
+template<class T, class V>
+V Map<T, V>::getValueByIndex(int i)
+{
+	return value[i];
+}
+
+template<class T, class V>
+void Map<T, V>::setValueByIndex(int i, V v)
+{
+	value[i] = v;
+}
+
+template<class T, class V>
 void Map<T, V>::addEntry(T k, V v)
 {
 	if (numEntries + 1 > capacity) {
+		//TODO: dynamically increase capacity
 		std::cout << "Map full" << std::endl;
 	}
 	else {
@@ -57,16 +100,16 @@ void Map<T, V>::display()
 }
 
 template<class T, class V>
-void Map<T, V>::search(T k)
+bool Map<T, V>::isInMap(T k)
 {
 	for (int i = 0; i < numEntries; i++) {
 		if (k == key[i]) {
-			//Key found print out value
-			std::cout << value[i] << std::endl;
+			//Key found -> return true
+			return true;
 		}
 	}
-	//Not found print out not found
-	std::cout << "Not Found" << std::endl;
+	//Not found-> return false
+	return false;
 }
 
 //int main() {

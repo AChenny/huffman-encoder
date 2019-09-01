@@ -11,9 +11,21 @@ private:
 public:
 	Map(int S);
 	~Map();
+	int getNumEntries();
+	
+	V getValue(T);
+	void setValue(T, V);
+
+	V getValueByIndex(int);
+	void setValueByIndex(int, V);
+	
+
 	void addEntry(T, V);
 	void remove(T);
 	void display();
-	void search(T);
+	
+	bool isInMap(T);
+
+
 
 };
