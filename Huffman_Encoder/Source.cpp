@@ -1,6 +1,7 @@
 #include <string>
 #include "Map.h"
 #include "Map.cpp"
+#include "CharacterCodes.h"
 #include <iostream>
 
 
@@ -46,6 +47,8 @@ Node * encodeData(Map<char, float> weightedData) {
 		Node * newNode = new Node;
 		newNode->value = weightedData.getKeyByIndex(i);
 		newNode->weight = weightedData.getValue(newNode->value);
+		newNode->left = nullptr;
+		newNode->right = nullptr;
 		orderedNodes[i] = newNode;
 	}
 	//Order all the nodes from least to greatest
@@ -101,15 +104,16 @@ Node * encodeData(Map<char, float> weightedData) {
 	return orderedNodes[orderedNodesSize -1];
 }
 
-void recursiveCoding(Node * root, std::string code, std::string * arrayOfCodes) {
-	if (root->left) {
+void recursiveCoding(Node * root, std::string code, CharacterCodes * arrayOfCodes) {
+	if (root->left != nullptr) {
 		recursiveCoding(root->left, code + "1", arrayOfCodes);
 	}
-	if (root->right) {
+	if (root->right != nullptr) {
 		recursiveCoding(root->right, code + "0", arrayOfCodes);
 	}
-	if (!(root->left) && !(root->right)) {
+	if ((root->left == nullptr) && (root->right == nullptr)) {
 		//TODO: Add to arrayOfCodes 
+		(*arrayOfCodes).addCode(root->value, code);
 	}
 }
 
@@ -124,10 +128,14 @@ int main() {
 	//myWeightedGraph.addEntry('c', 2.0);
 	//myWeightedGraph.setValue('b', 3.5);
 
-	Map<char, float> myWeightedData = readData("abbccddee");
+	Map<char, float> myWeightedData = readData("bbacdeaafjka");
 	myWeightedData.display();
 	std::cout << "-----------Encoded data-------" << std::endl;
 	Node * test = encodeData(myWeightedData);
+
+	CharacterCodes huffmanCodes = CharacterCodes::CharacterCodes(10);
+	recursiveCoding(test, "", &huffmanCodes);
+	huffmanCodes.display();
 
 	system("PAUSE");
 	return 0;
