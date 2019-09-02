@@ -1,8 +1,2 @@
-﻿  Source.cpp
-c:\users\anderson chen\onedrive\personal\programming\projects\huffman-encoder\huffman_encoder\source.cpp(12): warning C4018: '<': signed/unsigned mismatch
-c:\users\anderson chen\onedrive\personal\programming\projects\huffman-encoder\huffman_encoder\source.cpp(16): warning C4244: 'argument': conversion from 'double' to 'V', possible loss of data
-          with
-          [
-              V=float
-          ]
+﻿  Map.cpp
   Huffman_Encoder.vcxproj -> C:\Users\Anderson Chen\OneDrive\Personal\Programming\Projects\huffman-encoder\Debug\Huffman_Encoder.exe

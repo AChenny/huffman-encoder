@@ -14,14 +14,21 @@ Map<T, V>::Map(int s) {
 template<class T, class V>
 Map<T, V>::~Map()
 {
-	delete[] key;
-	delete[] value;
+	//FIXME: Deleting throws an error
+	//delete [] key;
+	//delete [] value;
 }
 
 template<class T, class V>
 int Map<T, V>::getNumEntries()
 {
 	return numEntries;
+}
+
+template<class T, class V>
+T Map<T, V>::getKeyByIndex(int i)
+{
+	return key[i];
 }
 
 template<class T, class V>

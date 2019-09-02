@@ -12,6 +12,8 @@ public:
 	Map(int S);
 	~Map();
 	int getNumEntries();
+
+	T getKeyByIndex(int);
 	
 	V getValue(T);
 	void setValue(T, V);
