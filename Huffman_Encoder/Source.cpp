@@ -4,8 +4,6 @@
 #include "CharacterCodes.h"
 #include <iostream>
 
-
-
 //Reads data from string and returns a map with weights
 Map<char, float> & readData(std::string data) {
 	Map<char, float> * weightedData =  new Map<char, float>(20);
@@ -117,6 +115,17 @@ void recursiveCoding(Node * root, std::string code, CharacterCodes * arrayOfCode
 	}
 }
 
+//test to print out Node tree using preOrder 
+void printTree(Node * nodeptr) {
+	std::cout << nodeptr->value << ",";
+	if (nodeptr->left != nullptr) {
+		printTree(nodeptr->left);
+	}
+	if (nodeptr->right != nullptr) {
+		printTree(nodeptr->right);
+	}
+}
+
 int main() {
 	std::string myString = "ABCDEF";
 	//Map<std::string, std::string> myDic = Map<std::string, std::string>::Map(10);
@@ -132,6 +141,9 @@ int main() {
 	myWeightedData.display();
 	std::cout << "-----------Encoded data-------" << std::endl;
 	Node * test = encodeData(myWeightedData);
+	
+	//FIXME: According to tree, all values are on the right
+	printTree(test);
 
 	CharacterCodes huffmanCodes = CharacterCodes::CharacterCodes(10);
 	recursiveCoding(test, "", &huffmanCodes);
