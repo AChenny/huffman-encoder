@@ -58,3 +58,13 @@ char CharacterCodes::getCharByCode(std::string s)
 	}
 	return '~';
 }
+
+char CharacterCodes::getCharByIndex(int i)
+{
+	return values[i];
+}
+
+std::string CharacterCodes::getValueByIndex(int i)
+{
+	return codes[i];
+}

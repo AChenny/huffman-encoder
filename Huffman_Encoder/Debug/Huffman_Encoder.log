@@ -1,10 +1,10 @@
 ﻿  Source.cpp
-c:\users\300292583\onedrive\personal\programming\projects\huffman-encoder\huffman_encoder\source.cpp(12): warning C4018: '<': signed/unsigned mismatch
-c:\users\300292583\onedrive\personal\programming\projects\huffman-encoder\huffman_encoder\source.cpp(16): warning C4244: 'argument': conversion from 'double' to 'V', possible loss of data
+c:\users\anderson chen\onedrive\personal\programming\projects\huffman-encoder\huffman_encoder\source.cpp(12): warning C4018: '<': signed/unsigned mismatch
+c:\users\anderson chen\onedrive\personal\programming\projects\huffman-encoder\huffman_encoder\source.cpp(16): warning C4244: 'argument': conversion from 'double' to 'V', possible loss of data
           with
           [
               V=float
           ]
-c:\users\300292583\onedrive\personal\programming\projects\huffman-encoder\huffman_encoder\source.cpp(124): warning C4018: '<': signed/unsigned mismatch
-c:\users\300292583\onedrive\personal\programming\projects\huffman-encoder\huffman_encoder\source.cpp(133): warning C4018: '<': signed/unsigned mismatch
-  Huffman_Encoder.vcxproj -> C:\Users\300292583\OneDrive\Personal\Programming\Projects\huffman-encoder\Debug\Huffman_Encoder.exe
+c:\users\anderson chen\onedrive\personal\programming\projects\huffman-encoder\huffman_encoder\source.cpp(124): warning C4018: '<': signed/unsigned mismatch
+c:\users\anderson chen\onedrive\personal\programming\projects\huffman-encoder\huffman_encoder\source.cpp(133): warning C4018: '<': signed/unsigned mismatch
+  Huffman_Encoder.vcxproj -> C:\Users\Anderson Chen\OneDrive\Personal\Programming\Projects\huffman-encoder\Debug\Huffman_Encoder.exe

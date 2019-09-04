@@ -16,5 +16,7 @@ public:
 	void display();
 	std::string getCodeByChar(char);
 	char getCharByCode(std::string);
+	char getCharByIndex(int);
+	std::string getValueByIndex(int);
 };
 

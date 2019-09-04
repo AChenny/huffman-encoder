@@ -154,10 +154,13 @@ void printTree(Node * nodeptr) {
 int main() {
 	std::string locationOfFile;
 	std::string dataFromFile;
+	std::string fileName;
 	std::cout << "Welcome, please enter the location of the .txt file to encode" << std::endl;
-	std::cin >> locationOfFile;
+	std::getline(std::cin, locationOfFile);
+	std::cout << "Please enter the file name." << std::endl;
+	std::getline(std::cin, fileName);
 
-	std::ifstream dataFile(locationOfFile);
+	std::ifstream dataFile(locationOfFile + "\\" + fileName);
 	//TODO: add double backslash to location to be able to read location
 	
 	if (dataFile.is_open()) {
@@ -182,7 +185,19 @@ int main() {
 	std::cout << "Huffman Values" << std::endl;
 	huffmanValues.display();
 
+	//Create a text file with the encodedData push to desktop
+	std::ofstream encodedFile;
+	encodedFile.open(locationOfFile + "\\" + "encodedData.txt");
+	encodedFile << encodedData << std::endl;
+	encodedFile.close();
 
+	//Create a text file with the huffman values push to desktop
+	std::ofstream huffmanFile;
+	huffmanFile.open(locationOfFile + "\\" + "huffmanValues.txt");
+	for (int i = 0; i < huffmanValues.getNumOfCodes(); i++) {
+		huffmanFile << huffmanValues.getCharByIndex(i) << "->" << huffmanValues.getValueByIndex(i) << std::endl;
+	}
+	huffmanFile.close();
 
 	system("PAUSE");
 	return 0;
