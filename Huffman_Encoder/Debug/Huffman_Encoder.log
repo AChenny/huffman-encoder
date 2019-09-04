@@ -1,11 +1,8 @@
-﻿  CharacterCodes.cpp
-  Map.cpp
-  Source.cpp
-c:\users\300292583\onedrive\personal\programming\projects\huffman-encoder\huffman_encoder\source.cpp(13): warning C4018: '<': signed/unsigned mismatch
-c:\users\300292583\onedrive\personal\programming\projects\huffman-encoder\huffman_encoder\source.cpp(17): warning C4244: 'argument': conversion from 'double' to 'V', possible loss of data
+﻿  Source.cpp
+c:\users\300292583\onedrive\personal\programming\projects\huffman-encoder\huffman_encoder\source.cpp(11): warning C4018: '<': signed/unsigned mismatch
+c:\users\300292583\onedrive\personal\programming\projects\huffman-encoder\huffman_encoder\source.cpp(15): warning C4244: 'argument': conversion from 'double' to 'V', possible loss of data
           with
           [
               V=float
           ]
-  Generating Code...
-C:\Users\300292583\OneDrive\Personal\Programming\Projects\huffman-encoder\Huffman_Encoder\Source.cpp : fatal error C1085: Cannot write compiler generated file: 'C:\Users\300292583\OneDrive\Personal\Programming\Projects\huffman-encoder\Huffman_Encoder\Debug\Source.obj': Invalid argument
+  Huffman_Encoder.vcxproj -> C:\Users\300292583\OneDrive\Personal\Programming\Projects\huffman-encoder\Debug\Huffman_Encoder.exe

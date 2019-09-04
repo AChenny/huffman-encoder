@@ -51,14 +51,18 @@ Node * encodeData(Map<char, float> weightedData) {
 	}
 	//Order all the nodes from least to greatest
 	//Bubble sort
-	for (int i = 1; i < orderedNodesSize; i++) {
-		for (int j = 0; j < orderedNodesSize - i; j++) {
-			if (orderedNodes[j]->weight > orderedNodes[j + 1]->weight) {
+	for (int i = 0; i < orderedNodesSize-1; i++) {
+		for (int j = 0; j < orderedNodesSize - i - 1; j++) {
+			if (orderedNodes[j]->weight < orderedNodes[j + 1]->weight) {
 				Node * temp = orderedNodes[j];
 				orderedNodes[j] = orderedNodes[j + 1];
 				orderedNodes[j + 1] = temp;
 			}
 		}
+	}
+	//test print out all orderedNodes
+	for (int i = 0; i < orderedNodesSize; i++) {
+		std::cout << "Value: " << orderedNodes[i]->value << " Weight: " << orderedNodes[i]->weight << std::endl;
 	}
 
 	//Loop through orderedNodeSize, creating a new node with null value, with the left
@@ -69,7 +73,7 @@ Node * encodeData(Map<char, float> weightedData) {
 	//else, move the node in that index 1 spot down
 	//Repeat until we can insert
 	//Then loop through indices i + 1;
-
+	
 	for (int i = 0; i < orderedNodesSize - 1; i++) {
 		Node * newNode = new Node;
 		newNode->left = orderedNodes[i];
@@ -78,18 +82,24 @@ Node * encodeData(Map<char, float> weightedData) {
 		newNode->value = 'i';
 		
 		for (int j = i + 2; j < orderedNodesSize; j++) {
-			if (newNode->weight > orderedNodes[j]->weight) {
+			if (newNode->weight < orderedNodes[j]->weight) {
 				orderedNodes[j - 1] = newNode;
 				break;
 			}
 			else {
 				orderedNodes[j - 1] = orderedNodes[j];
+				if (j == orderedNodesSize - 1) {
+					orderedNodes[j] = newNode;
+				}
 			}
+			//Special case that the newNode should be at the end
+			
 		}
 		if (i == orderedNodesSize - 2) {
 			orderedNodes[orderedNodesSize - 1] = newNode;
 		}
 	}
+
 
 	//Print out the node at the end 
 	std::cout << orderedNodes[orderedNodesSize -1]->weight << std::endl;
@@ -105,9 +115,11 @@ Node * encodeData(Map<char, float> weightedData) {
 void recursiveCoding(Node * root, std::string code, CharacterCodes * arrayOfCodes) {
 	if (root->left != nullptr) {
 		recursiveCoding(root->left, code + "1", arrayOfCodes);
+		std::cout << "left" << std::endl;
 	}
 	if (root->right != nullptr) {
 		recursiveCoding(root->right, code + "0", arrayOfCodes);
+		std::cout << "right" << std::endl;
 	}
 	if ((root->left == nullptr) && (root->right == nullptr)) {
 		//TODO: Add to arrayOfCodes 
@@ -117,14 +129,13 @@ void recursiveCoding(Node * root, std::string code, CharacterCodes * arrayOfCode
 
 //test to print out Node tree using preOrder 
 void printTree(Node * nodeptr) {
-	std::cout << nodeptr->value << ",";
-	if (nodeptr->left != nullptr) {
+	if (nodeptr != nullptr) {
+		std::cout << nodeptr->value << std::endl;
 		printTree(nodeptr->left);
-	}
-	if (nodeptr->right != nullptr) {
 		printTree(nodeptr->right);
 	}
 }
+
 
 int main() {
 	std::string myString = "ABCDEF";
@@ -137,7 +148,7 @@ int main() {
 	//myWeightedGraph.addEntry('c', 2.0);
 	//myWeightedGraph.setValue('b', 3.5);
 
-	Map<char, float> myWeightedData = readData("bbacdeaafjka");
+	Map<char, float> myWeightedData = readData("kkefavkloabc");
 	myWeightedData.display();
 	std::cout << "-----------Encoded data-------" << std::endl;
 	Node * test = encodeData(myWeightedData);
