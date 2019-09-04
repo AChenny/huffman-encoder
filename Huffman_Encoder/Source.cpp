@@ -127,6 +127,29 @@ void recursiveCoding(Node * root, std::string code, CharacterCodes * arrayOfCode
 	}
 }
 
+std::string createCode(std::string initCode, CharacterCodes charCodes) {
+	std::string code;
+
+	for (int i = 0; i < initCode.length(); i++) {
+		code += charCodes.getCodeByChar(initCode[i]);
+	}
+	return code;
+}
+
+std::string decode(std::string initCode, CharacterCodes charCodes) {
+	std::string iString = "";
+	std::string decodedString = "";
+	for (int i = 0; i < initCode.length(); i++) {
+		iString += initCode[i];
+		//'~' character is returned if the character is not found
+		if (charCodes.getCharByCode(iString) != '~') {
+			decodedString += charCodes.getCharByCode(iString);
+			iString = "";
+		}
+	}
+	return decodedString;
+}
+
 //test to print out Node tree using preOrder 
 void printTree(Node * nodeptr) {
 	if (nodeptr != nullptr) {
@@ -139,14 +162,6 @@ void printTree(Node * nodeptr) {
 
 int main() {
 	std::string myString = "ABCDEF";
-	//Map<std::string, std::string> myDic = Map<std::string, std::string>::Map(10);
-	//myDic.display();
-
-	//Map<char, float> myWeightedGraph = Map<char, float>::Map(10);
-	//myWeightedGraph.addEntry('a', 1.0);
-	//myWeightedGraph.addEntry('b', 1.0);
-	//myWeightedGraph.addEntry('c', 2.0);
-	//myWeightedGraph.setValue('b', 3.5);
 
 	Map<char, float> myWeightedData = readData("kkefavkloabc");
 	myWeightedData.display();
@@ -159,6 +174,15 @@ int main() {
 	CharacterCodes huffmanCodes = CharacterCodes::CharacterCodes(10);
 	recursiveCoding(test, "", &huffmanCodes);
 	huffmanCodes.display();
+
+	std::cout << "Huffman Encoded String" << std::endl;
+	std::string encodedData = createCode("kkefavkloabc", huffmanCodes);
+	std::cout << encodedData << std::endl;
+
+	std::cout << "Huffman Decoded String" << std::endl;
+	std::string decodedData = decode(encodedData, huffmanCodes);
+	std::cout << decodedData << std::endl;
+
 
 	system("PAUSE");
 	return 0;

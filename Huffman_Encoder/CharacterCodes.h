@@ -14,6 +14,7 @@ public:
 	int getNumOfCodes();
 	void addCode(char v, std::string c);
 	void display();
-
+	std::string getCodeByChar(char);
+	char getCharByCode(std::string);
 };
 
