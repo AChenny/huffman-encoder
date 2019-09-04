@@ -3,6 +3,7 @@
 #include "Map.cpp"
 #include "CharacterCodes.h"
 #include <iostream>
+#include <fstream>
 
 //Reads data from string and returns a map with weights
 Map<char, float> & readData(std::string data) {
@@ -60,10 +61,6 @@ Node * encodeData(Map<char, float> weightedData) {
 			}
 		}
 	}
-	//test print out all orderedNodes
-	for (int i = 0; i < orderedNodesSize; i++) {
-		std::cout << "Value: " << orderedNodes[i]->value << " Weight: " << orderedNodes[i]->weight << std::endl;
-	}
 
 	//Loop through orderedNodeSize, creating a new node with null value, with the left
 	//as the least weight node, and the right as the second least weight node
@@ -100,10 +97,6 @@ Node * encodeData(Map<char, float> weightedData) {
 		}
 	}
 
-
-	//Print out the node at the end 
-	std::cout << orderedNodes[orderedNodesSize -1]->weight << std::endl;
-
 	//Test to print out all nodes
 	//for (int i = 0; i < weightedData.getNumEntries(); i++) {
 	//	std::cout << orderedNodes[i]->value << "->" << orderedNodes[i]->weight  << std::endl;
@@ -115,11 +108,9 @@ Node * encodeData(Map<char, float> weightedData) {
 void recursiveCoding(Node * root, std::string code, CharacterCodes * arrayOfCodes) {
 	if (root->left != nullptr) {
 		recursiveCoding(root->left, code + "1", arrayOfCodes);
-		std::cout << "left" << std::endl;
 	}
 	if (root->right != nullptr) {
 		recursiveCoding(root->right, code + "0", arrayOfCodes);
-		std::cout << "right" << std::endl;
 	}
 	if ((root->left == nullptr) && (root->right == nullptr)) {
 		//TODO: Add to arrayOfCodes 
@@ -161,27 +152,36 @@ void printTree(Node * nodeptr) {
 
 
 int main() {
-	std::string myString = "ABCDEF";
+	std::string locationOfFile;
+	std::string dataFromFile;
+	std::cout << "Welcome, please enter the location of the .txt file to encode" << std::endl;
+	std::cin >> locationOfFile;
 
-	Map<char, float> myWeightedData = readData("kkefavkloabc");
-	myWeightedData.display();
-	std::cout << "-----------Encoded data-------" << std::endl;
-	Node * test = encodeData(myWeightedData);
+	std::ifstream dataFile(locationOfFile);
+	//TODO: add double backslash to location to be able to read location
 	
-	//FIXME: According to tree, all values are on the right
-	printTree(test);
+	if (dataFile.is_open()) {
+		while (std::getline(dataFile, dataFromFile)) {
+			std::cout << dataFromFile << std::endl;
+		}
+		dataFile.close();
+	}
+	else {
+		std::cout << "Could not open file" << std::endl;
+	}
 
-	CharacterCodes huffmanCodes = CharacterCodes::CharacterCodes(10);
-	recursiveCoding(test, "", &huffmanCodes);
-	huffmanCodes.display();
+	Map<char, float> weightedMap = readData(dataFromFile);
+	Node * root = encodeData(weightedMap);
+	CharacterCodes huffmanValues = CharacterCodes::CharacterCodes(20);
+	recursiveCoding(root, "", &huffmanValues);
+	std::string encodedData = createCode(dataFromFile, huffmanValues);
 
-	std::cout << "Huffman Encoded String" << std::endl;
-	std::string encodedData = createCode("kkefavkloabc", huffmanCodes);
+	std::cout << "Encoded data" << std::endl;
 	std::cout << encodedData << std::endl;
 
-	std::cout << "Huffman Decoded String" << std::endl;
-	std::string decodedData = decode(encodedData, huffmanCodes);
-	std::cout << decodedData << std::endl;
+	std::cout << "Huffman Values" << std::endl;
+	huffmanValues.display();
+
 
 
 	system("PAUSE");
