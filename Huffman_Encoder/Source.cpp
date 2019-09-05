@@ -160,9 +160,19 @@ int main() {
 	std::cout << "Please enter the file name." << std::endl;
 	std::getline(std::cin, fileName);
 
-	std::ifstream dataFile(locationOfFile + "\\" + fileName);
+	std::string reformattedLocation = "";
+	for (int i = 0; i < locationOfFile.length(); i++) {
+		if (locationOfFile[i] == '\\') {
+			reformattedLocation += "\\\\";
+		}
+		else {
+			reformattedLocation += locationOfFile[i];
+		}
+	}
+
+	std::ifstream dataFile(reformattedLocation + "\\" + fileName);
 	//TODO: add double backslash to location to be able to read location
-	
+
 	if (dataFile.is_open()) {
 		while (std::getline(dataFile, dataFromFile)) {
 			std::cout << dataFromFile << std::endl;
